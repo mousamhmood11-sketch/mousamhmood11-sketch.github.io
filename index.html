@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PerkPass — Referral Rewards Board</title>
+<meta name="description" content="A personal referral rewards board: 28 programs across crypto exchanges, payments, wallets, and rewards apps — sign up through the link to claim each platform's new-client bonus.">
+<meta property="og:title" content="PerkPass — Referral Rewards Board">
+<meta property="og:description" content="28 referral programs across crypto exchanges, payments, wallets, and rewards apps. Sign up through the link to claim each platform's new-client bonus.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PerkPass — Referral Rewards Board">
+<meta name="twitter:description" content="28 referral programs — crypto exchanges, payments, wallets, and rewards apps.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#14181F;
+    --ink-soft:#1D232D;
+    --cream:#FBF7EE;
+    --cream-dim:#EFE8D6;
+    --amber:#E8A33D;
+    --amber-bright:#F5BE63;
+    --teal:#1F7A6C;
+    --line: rgba(251,247,238,0.12);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background: var(--ink);
+    color: var(--cream);
+    font-family:'Inter', sans-serif;
+    min-height:100vh;
+  }
+
+  /* HERO */
+  .hero{
+    padding: 72px 24px 56px;
+    max-width: 980px;
+    margin: 0 auto;
+    border-bottom: 1px solid var(--line);
+  }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color: var(--amber-bright);
+    display:flex; align-items:center; gap:10px;
+    margin-bottom:18px;
+  }
+  .eyebrow::before{ content:""; width:20px; height:1px; background:var(--amber-bright); }
+  h1{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size: clamp(38px, 7vw, 68px);
+    line-height:1.02;
+    margin:0 0 18px;
+    letter-spacing:-0.02em;
+  }
+  h1 span{ color: var(--amber-bright); }
+  .lede{
+    font-size:16px;
+    line-height:1.6;
+    color: rgba(251,247,238,0.65);
+    max-width: 560px;
+  }
+  .stats{
+    display:flex; gap:36px;
+    margin-top: 34px;
+    flex-wrap: wrap;
+  }
+  .stat .n{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 22px;
+    color: var(--amber-bright);
+    font-weight:600;
+  }
+  .stat .l{
+    font-size:11px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color: rgba(251,247,238,0.45);
+    margin-top:2px;
+  }
+
+  /* BOARD */
+  .board{
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 56px 24px 90px;
+  }
+  .section-head{
+    display:flex; align-items:baseline; justify-content:space-between;
+    margin: 44px 0 20px;
+  }
+  .section-head:first-child{ margin-top:0; }
+  .section-head h2{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:600;
+    font-size:22px;
+    margin:0;
+  }
+  .section-head .gate{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:11px;
+    color: rgba(251,247,238,0.4);
+    letter-spacing:0.06em;
+    text-transform:uppercase;
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 18px;
+  }
+
+  /* Boarding-pass style card */
+  .pass{
+    background: var(--cream);
+    color: var(--ink);
+    border-radius: 4px;
+    display:grid;
+    grid-template-columns: 1fr auto;
+    overflow:hidden;
+    box-shadow: 0 24px 48px -28px rgba(0,0,0,0.6);
+  }
+  .pass-main{
+    padding: 20px 18px;
+    position: relative;
+  }
+  .pass-platform{
+    font-family:'Space Grotesk', sans-serif;
+    font-weight:700;
+    font-size: 19px;
+    margin-bottom: 10px;
+  }
+  .pass-row{
+    display:flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing:0.05em;
+    text-transform: uppercase;
+    color: rgba(20,24,31,0.45);
+    margin-bottom: 4px;
+  }
+  .bonus-line{
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px dashed rgba(20,24,31,0.2);
+  }
+  .bonus-label{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 10px;
+    letter-spacing:0.08em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 4px;
+  }
+  .bonus-value{
+    font-size: 14px;
+    font-weight: 500;
+    color: rgba(20,24,31,0.85);
+  }
+  .pass-stub{
+    background: var(--ink);
+    color: var(--cream);
+    width: 88px;
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content: center;
+    gap: 10px;
+    padding: 14px 8px;
+    position: relative;
+    border-left: 2px dashed rgba(251,247,238,0.25);
+  }
+  .pass-stub::before, .pass-stub::after{
+    content:"";
+    position:absolute;
+    width:16px; height:16px;
+    background: var(--ink);
+    border-radius: 50%;
+    left: -9px;
+  }
+  .pass-stub::before{ top:-8px; box-shadow: 0 0 0 8px var(--ink), inset 0 0 0 8px var(--ink); }
+  .pass-stub::after{ bottom:-8px; box-shadow: 0 0 0 8px var(--ink), inset 0 0 0 8px var(--ink); }
+  .go-link{
+    text-decoration:none;
+    color: var(--ink);
+    background: var(--amber-bright);
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 10.5px;
+    letter-spacing:0.06em;
+    text-transform: uppercase;
+    padding: 8px 10px;
+    border-radius: 3px;
+    text-align:center;
+    font-weight:600;
+    transition: transform 0.12s ease, background 0.12s ease;
+  }
+  .go-link:hover{ background: var(--amber); transform: translateY(-1px); }
+  .code-tag{
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 9px;
+    color: rgba(251,247,238,0.5);
+    writing-mode: vertical-rl;
+    letter-spacing: 0.1em;
+  }
+
+  footer{
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 0 24px 60px;
+    font-family:'IBM Plex Mono', monospace;
+    font-size: 11.5px;
+    color: rgba(251,247,238,0.4);
+    line-height:1.7;
+    border-top: 1px solid var(--line);
+    padding-top: 28px;
+  }
+
+  @media (prefers-reduced-motion: reduce){ *{ transition:none !important; } }
+</style>
+</head>
+<body>
+
+  <div class="hero">
+    <div class="eyebrow">PerkPass &middot; Referral rewards board</div>
+    <h1>Boarding passes<br>for <span>better deals</span>.</h1>
+    <div class="lede">Every program below is one I use myself and vouch for. Sign up through my link or code and you get the new-client bonus on each platform — no extra cost to you.</div>
+    <div class="stats">
+      <div class="stat"><div class="n">28</div><div class="l">Programs</div></div>
+      <div class="stat"><div class="n">4</div><div class="l">Categories</div></div>
+    </div>
+  </div>
+
+  <div class="board">
+
+    <div class="section-head"><h2>Crypto exchanges &amp; trading</h2><div class="gate">12 programs</div></div>
+    <div class="grid">
+      <div class="pass"><div class="pass-main"><div class="pass-platform">XM</div><div class="bonus-line"><div class="bonus-label">New client gets</div><div class="bonus-value">Referral reward for you + welcome bonus for new client — ask for current terms</div></div></div><div class="pass-stub"><div class="code-tag">PERKPASS</div><a class="go-link" href="https://affs.click/J4dkq" target="_blank" rel="noopener">Join</a></div></div>
+
+      <div class="pass"><div class="pass-main"><div class="pass-platform">MEXC</div><div class="pass-row"><span>Code</span><span>mexc-3xYDs</span></div><div class="bonus-line"><div class="bonus-label">New client gets</div><div class="bonus-value">New-client welcome bonus — ask for current terms</div></div></div><div class="pass-stub"><div class="code-tag">PERKPASS</div><a class="go-link" href="https://www.mexc.com/acquisition/custom-sign-up?shareCode=mexc-3xYDs" target="_blank" rel="noopener">Join</a></div></div>
+
+      <div class="pass"><div class="pass-main"><div class="pass-platform">WEEX</div><div class="pass-row"><span>Code</span><span>99m03</span></div><div class="bonus-line"><div class="bonus-label">New client gets</div><div class="bonus-value">New-client welcome bonus — ask for current terms</div></div></div><div class="pass-stub"><div class="code-tag">PERKPASS</div><a class="go-link" href="https://weex.com/register?vipCode=99m03" target="_blank" rel="noopener">Join</a></div></div>
+
+      <div class="pass"><div class="pass-main"><div class="pass-platform">OKX</div><div class="pass-row"><span>Code</span><span>GOODBOYGONEBAD</span></div><div class="bonus-line"><div class="bonus-label">New client gets</div><div class="bonus-value">New-client welcome bonus — ask for current terms</div></div></div><div class="pass-stub"><div class="code-tag">PERKPASS</div><a class="go-link" href="https://web3.okx.com/join/GOODBOYGONEBAD" target="_blank" rel="noopener">Join</a></div></div>
+
+      <div class="pass"><div class="pass-main"><div class="pass-platform">Bybit</div><div class="pass-row"><span>Code</span><span>NMZWJVW</span></div><div class="bonus-line"><div class="bonus-label">New client gets</div><div class="bonus-value">New-client welcome bonus — ask for current terms</div></div></div><div class="pass-stub"><div class="code-tag">PERKPASS</div><a class="go-link" href="https://www.bybit.com/invite?ref=NMZWJVW" target="_blank" rel="noopener">Join</a></div></div>
+
+      <div class="pass"><div class="pass-main"><div class="pass-platform">HFM</div><div class="pass-row"><span>Code</span><span>30529971</span></div><div class="bonus-line"><div class="bonus-label">New client gets</div><div class="bonus-value">New-client welcome bonus — ask for current terms</div></div></div><div class="pass-stub"><div class="code-tag">PERKPASS</div><a class="go-link" href="https://www.hfm.com/sv/en/hfapp?refid=30529971" target="_blank" rel="noopener">Join</a></div></div>
+
+      <div class="pass"><div class="pass-main"><div class="pass-platform">KAST</div><div class="pass-row"><span>Code</span><span>NPF3EHJE</span></div><div class="bonus-line"><div class="bonus-label">New client gets</div><div class="bonus-value">New-client welcome bonus — ask for current terms</div></div></div><div class="pass-stub"><div class="code-tag">PERKPASS</div><a class="go-link" href="https://app.kast.xyz/referral/NPF3EHJE" target="_blank" rel="noopener">Join</a></div></div>
+
+      <div class="pass"><div class="pass-main"><div class="pass-platform">BCPoker</div><div class="bonus-line"><div class="bonus-label">New client gets</div><div class="bonus-value">New-client welcome bonus — ask for current terms</div></div></div><div class="pass-stub"><div class="code-tag">PERKPASS</div><a class="go-link" href="https://bcpoker.com/s/R6ngcjbf" target="_blank" rel="noopener">Join</a></div></div>
+
+      <div class="pass"><div class="pass-main"><div class="pass-platform">Ether.fi</div><div class="bonus-line"><div class="bonus-label">New client gets</div><div class="bonus-value">New-client welcome bonus — ask for current terms</div></div></div><div class="pass-stub"><div class="code-tag">PERKPASS</div><a class="go-link" href="https://www.ether.fi/@868835ee" target="_blank" rel="noopener">Join</a></div></div>
+
+      <div class="pass"><div class="pass-main"><div class="pass-platform">Tickmill</div><div class="bonus-line"><div class="bonus-label">New client gets</div><div class="bonus-value">New-client welcome bonus — ask for current terms</div></div></div><div class="pass-stub"><div class="code-tag">PERKPASS</div><a class="go-link" href="https://secure.tickmill.com?utm_campaign=ib_link&utm_content=IB87002144&utm_medium=Open+Account&utm_source=link&lp=https%3a%2f%2fsecure.tickmill.com%2fen%2fsign-up" target="_blank" rel="noopener">Join</a></div></div>
+
+      <div class="pass"><div class="pass-main"><div class="pass-platform">Fasset</div><div class="pass-row"><span>Code</span><span>O35P02</span></div><div class="bonus-line"><div class="bonus-label">New client gets</div><div class="bonus-value">New-client welcome bonus — ask for current terms</div></div></div><div class="pass-stub"><div class="code-tag">PERKPASS</div><a class="go-link" href="https://fasset.com?referral=O35P02" target="_blank" rel="noopener">Join</a></div></div>
+
+      <div class="pass"><div class="pass-main"><div class="pass-platform">Gluon</div><div class="bonus-line"><div class="bonus-label">New client gets</div><div class="bonus-value">New-client welcome bonus — ask for current terms</div></div></div><div class="pass-stub"><div class="code-tag">PERKPASS</div><a class="go-link" href="https://link.gluon.money/join/prospect2908" target="_blank" rel="noopener">Join</a></div></div>
+    </div>
+
+    <div class="section-head"><h2>Payments &amp; wallets</h2><div class="gate">8 programs</div></div>
+    <div class="grid">
+      <div class="pass"><div class="pass-main"><div class="pass-platform">RedotPay</div><div class="bonus-line"><div class="bonus-label">New client gets</div><div class="bonus-value">New-client welcome bonus — ask for current terms</div></div></div><div class="pass-stub"><div class="code-tag">PERKPASS</div><a class="go-link" href="https://url.hk/i/en/jirn9" target="_blank" rel="noopener">Join</a></div></div>
+
+      <div class="pass"><div class="pass-main"><div class="pass-platform">Wise</div><div class="bonus-line"><div class="bonus-label">New client gets</div><div class="bonus-value">Fee-free transfer for new clients — ask for current terms</div></div></div><div class="pass-stub"><div class="code-tag">PERKPASS</div><a class="go-link" href="https://wise.com/invite/ahpc/mostafamahmoude15" target="_blank" rel="noopener">Join</a></div></div>
+
+      <div class="pass"><div class="pass-main"><div class="pass-platform">Nsave</div><div class="bonus-line"><div class="bonus-label">New client gets</div><div class="bonus-value">New-client welcome bonus — ask for current terms</div></div></div><div class="pass-stub"><div class="code-tag">PERKPASS</div><a class="go-link" href="https://web.nsave.com/invite/mustafa_mahmoud429" target="_blank" rel="noopener">Join</a></div></div>
+
+      <div class="pass"><div class="pass-main"><div class="pass-platform">Finom</div><div class="bonus-line"><div class="bonus-label">New client gets</div><div class="bonus-value">New-client welcome bonus — ask for current terms</div></div></div><div class="pass-stub"><div class="code-tag">PERKPASS</div><a class="go-link" href="https://app.finom.co/r/mUFuRdkF" target="_blank" rel="noopener">Join</a></div></div>
+
+      <div class="pass"><div class="pass-main"><div class="pass-platform">Airtm</div><div class="bonus-line"><div class="bonus-label">New client gets</div><div class="bonus-value">New-client welcome bonus — ask for current terms</div></div></div><div class="pass-stub"><div class="code-tag">PERKPASS</div><a class="go-link" href="https://app.airtm.com/ivt/mosto43tgsefl" target="_blank" rel="noopener">Join</a></div></div>
+
+      <div class="pass"><div class="pass-main"><div class="pass-platform">Coca</div><div class="pass-row"><span>Code</span><span>TQPQnpP6D5Q</span></div><div class="bonus-line"><div class="bonus-label">New client gets</div><div class="bonus-value">New-client welcome bonus — ask for current terms</div></div></div><div class="pass-stub"><div class="code-tag">PERKPASS</div><a class="go-link" href="https://wwallet.app.link/referral?referral_code=TQPQnpP6D5Q" target="_blank" rel="noopener">Join</a></div></div>
+
+      <div class="pass"><div class="pass-main"><div class="pass-platform">Cashing</div><div class="bonus-line"><div class="bonus-label">New client gets</div><div class="bonus-value">New-client welcome bonus — ask for current terms</div></div></div><div class="pass-stub"><div class="code-tag">PERKPASS</div><a class="go-link" href="https://cashinstyle.com/?ref=6a792593djrcdspo" target="_blank" rel="noopener">Join</a></div></div>
+
+      <div class="pass"><div class="pass-main"><div class="pass-platform">Nex Pay</div><div class="bonus-line"><div class="bonus-label">New client gets</div><div class="bonus-value">New-client welcome bonus — ask for current terms</div></div></div><div class="pass-stub"><div class="code-tag">PERKPASS</div><a class="go-link" href="https://t.me/NexPay0_bot?startapp=1270416063" target="_blank" rel="noopener">Join</a></div></div>
+    </div>
+
+    <div class="section-head"><h2>Rewards &amp; earning apps</h2><div class="gate">6 programs</div></div>
+    <div class="grid">
+      <div class="pass"><div class="pass-main"><div class="pass-platform">Noones</div><div class="bonus-line"><div class="bonus-label">New client gets</div><div class="bonus-value">New-client welcome bonus — ask for current terms</div></div></div><div class="pass-stub"><div class="code-tag">PERKPASS</div><a class="go-link" href="https://noones.com/r/PertYak639" target="_blank" rel="noopener">Join</a></div></div>
+
+      <div class="pass"><div class="pass-main"><div class="pass-platform">Courtyard</div><div class="bonus-line"><div class="bonus-label">New client gets</div><div class="bonus-value">New-client welcome bonus — ask for current terms</div></div></div><div class="pass-stub"><div class="code-tag">PERKPASS</div><a class="go-link" href="https://courtyard.io/invite/E2TYJ2" target="_blank" rel="noopener">Join</a></div></div>
+
+      <div class="pass"><div class="pass-main"><div class="pass-platform">Zulti</div><div class="bonus-line"><div class="bonus-label">New client gets</div><div class="bonus-value">$10 free for new sign-ups with this code</div></div></div><div class="pass-stub"><div class="code-tag">PERKPASS</div><a class="go-link" href="https://zulti.com/?r=C6JT7YQAE6" target="_blank" rel="noopener">Join</a></div></div>
+
+      <div class="pass"><div class="pass-main"><div class="pass-platform">Pawns.app</div><div class="bonus-line"><div class="bonus-label">New client gets</div><div class="bonus-value">New-client welcome bonus — ask for current terms</div></div></div><div class="pass-stub"><div class="code-tag">PERKPASS</div><a class="go-link" href="https://discoverpawns.eu/20242646" target="_blank" rel="noopener">Join</a></div></div>
+
+      <div class="pass"><div class="pass-main"><div class="pass-platform">Gamermine</div><div class="bonus-line"><div class="bonus-label">New client gets</div><div class="bonus-value">New-client welcome bonus — ask for current terms</div></div></div><div class="pass-stub"><div class="code-tag">PERKPASS</div><a class="go-link" href="https://gamermine.com/r/mousa" target="_blank" rel="noopener">Join</a></div></div>
+
+      <div class="pass"><div class="pass-main"><div class="pass-platform">Verb</div><div class="pass-row"><span>Code</span><span>B3HBDGFV</span></div><div class="bonus-line"><div class="bonus-label">New client gets</div><div class="bonus-value">New-client welcome bonus — ask for current terms</div></div></div><div class="pass-stub"><div class="code-tag">PERKPASS</div><a class="go-link" href="https://verb-data.com/signup?ref=B3HBDGFV" target="_blank" rel="noopener">Join</a></div></div>
+    </div>
+
+    <div class="section-head"><h2>Shopping &amp; cashback</h2><div class="gate">2 programs</div></div>
+    <div class="grid">
+      <div class="pass"><div class="pass-main"><div class="pass-platform">Rakuten</div><div class="pass-row"><span>Code</span><span>LAGENS7</span></div><div class="bonus-line"><div class="bonus-label">New client gets</div><div class="bonus-value">Cash-back bonus for new members — ask for current terms</div></div></div><div class="pass-stub"><div class="code-tag">PERKPASS</div><a class="go-link" href="https://www.rakuten.com/r/LAGENS7" target="_blank" rel="noopener">Join</a></div></div>
+
+      <div class="pass"><div class="pass-main"><div class="pass-platform">Etsy</div><div class="bonus-line"><div class="bonus-label">New client gets</div><div class="bonus-value">Shop link — no referral bonus attached</div></div></div><div class="pass-stub"><div class="code-tag">PERKPASS</div><a class="go-link" href="https://www.etsy.com/people/ij74njjyayvweuc8" target="_blank" rel="noopener">Join</a></div></div>
+    </div>
+
+  </div>
+
+  <footer>
+    PerkPass is a personal referral board — not affiliated with the platforms listed. Bonuses, eligibility, and terms are set by each platform and can change without notice; always confirm current terms on their site before signing up.
+  </footer>
+
+</body>
+</html>
